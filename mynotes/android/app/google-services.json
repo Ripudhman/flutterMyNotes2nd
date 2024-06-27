@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "931475926490",
+    "firebase_url": "https://mynotes2nd-27eb8-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mynotes2nd-27eb8",
+    "storage_bucket": "mynotes2nd-27eb8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931475926490:android:dace002721500a8644e4e3",
+        "android_client_info": {
+          "package_name": "com.ripu.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCge1_YjTPJYU0f0cJtDpmP7s8ktZ0JDjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
