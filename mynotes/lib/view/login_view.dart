@@ -34,74 +34,70 @@ class _LoginViewState extends State<LoginView> {
       appBar: AppBar(
         title: const Text("Login"),
       ),
-      body: FutureBuilder(
-          future: Firebase.initializeApp(
-            options: DefaultFirebaseOptions.currentPlatform,
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: TextField(
+              keyboardType: TextInputType.emailAddress,
+              enableSuggestions: false,
+              autocorrect: false,
+              controller: _email,
+              decoration: InputDecoration(
+                icon: const Icon(Icons.email),
+                hintText: "Email",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(19),
+                ),
+              ),
+            ),
           ),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: TextField(
-                        keyboardType: TextInputType.emailAddress,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        controller: _email,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.email),
-                          hintText: "Email",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(19),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: TextField(
-                        controller: _password,
-                        obscureText: true,
-                        enableSuggestions: false,
-                        autocorrect: false,
-                        decoration: InputDecoration(
-                          icon: const Icon(Icons.password),
-                          hintText: "Password",
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(19),
-                          ),
-                        ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () async {
-                        final email = _email.text;
-                        final password = _password.text;
-                        try {
-                          final userCredential = await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: email, password: password);
-                          print(userCredential);
-                        } on FirebaseAuthException catch (e) {
-                          if (e.code == 'invalid-credential') {
-                            print("Invalid Credentail");
-                          } else if (e.code == "user-not-found") {
-                            print("User Not Found");
-                          } else if (e.code == "wrong-password") {
-                            print("Wrong Password");
-                          }
-                        }
-                      },
-                      child: const Text("Login"),
-                    ),
-                  ],
-                );
-              default:
-                return const Text("Loading....");
-            }
-          }),
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: TextField(
+              controller: _password,
+              obscureText: true,
+              enableSuggestions: false,
+              autocorrect: false,
+              decoration: InputDecoration(
+                icon: const Icon(Icons.password),
+                hintText: "Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(19),
+                ),
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              final email = _email.text;
+              final password = _password.text;
+              try {
+                final userCredential = await FirebaseAuth.instance
+                    .signInWithEmailAndPassword(
+                        email: email, password: password);
+                print(userCredential);
+              } on FirebaseAuthException catch (e) {
+                if (e.code == 'invalid-credential') {
+                  print("Invalid Credentail");
+                } else if (e.code == "user-not-found") {
+                  print("User Not Found");
+                } else if (e.code == "wrong-password") {
+                  print("Wrong Password");
+                }
+              }
+            },
+            child: const Text("Login"),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil('/register/', (route) => false);
+            },
+            child: const Text("Not Register yet? Register Here!"),
+          ),
+        ],
+      ),
     );
   }
 }
